@@ -35,6 +35,7 @@ Depois abra: `http://localhost:8000`
 ## Gerar pacote `.edugame`
 
 O projeto inclui um empacotador em `scripts/package-edugame.sh`.
+Os metadados do pacote ficam em `manifest.json` na raiz do repositório.
 
 ```bash
 # gera em dist/cdu-matematica-2ano.edugame
