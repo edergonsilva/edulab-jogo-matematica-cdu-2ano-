@@ -37,6 +37,8 @@ Depois abra: `http://localhost:8000`
 O projeto inclui um empacotador em `scripts/package-edugame.sh`.
 Os metadados do pacote ficam em `manifest.json` na raiz do repositório.
 
+Importante para execução no runner do EduLab Games: `index.html`, `styles.css` e `script.js` devem permanecer na raiz do pacote.
+
 ```bash
 # gera em dist/cdu-matematica-2ano.edugame
 ./scripts/package-edugame.sh
