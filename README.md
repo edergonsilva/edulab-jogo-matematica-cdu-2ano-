@@ -24,10 +24,8 @@ Jogo educacional para praticar **Centena, Dezena e Unidade (CDU)** com foco no *
 Como é um jogo web estático, basta abrir `index.html` no navegador.
 
 Opcionalmente, para rodar com servidor local:
-
-```bash
-cd /tmp/workspace/edergonsilva/edulab-jogo-matematica-cdu-2ano-
-python3 -m http.server 8000
+    # a partir da pasta do repositório clonado
+    python3 -m http.server 8000
 ```
 
 Depois abra: `http://localhost:8000`
