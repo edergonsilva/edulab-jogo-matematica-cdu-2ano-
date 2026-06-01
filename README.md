@@ -15,6 +15,7 @@ Jogo educacional para praticar **Centena, Dezena e Unidade (CDU)** com foco no *
   - Contas matemáticas com CDU
   - Probleminhas de interpretação
 - Rodadas com ordem aleatória
+- Cada rodada gera **30 questões novas** com valores diferentes
 - Sem repetição de perguntas dentro de cada rodada
 - Feedback de acerto/erro e avanço entre questões
 

@@ -1,73 +1,4 @@
-const QUESTOES = [
-  {
-    tipo: "Material dourado",
-    enunciado: "Observe os blocos e complete a tabela CDU.",
-    representacao: { c: 1, d: 2, u: 3 },
-    resposta: { c: 1, d: 2, u: 3 }
-  },
-  {
-    tipo: "Material dourado",
-    enunciado: "Observe os blocos e complete a tabela CDU.",
-    representacao: { c: 2, d: 0, u: 5 },
-    resposta: { c: 2, d: 0, u: 5 }
-  },
-  {
-    tipo: "Material dourado",
-    enunciado: "Observe os blocos e complete a tabela CDU.",
-    representacao: { c: 3, d: 4, u: 1 },
-    resposta: { c: 3, d: 4, u: 1 }
-  },
-  {
-    tipo: "Material dourado",
-    enunciado: "Observe os blocos e complete a tabela CDU.",
-    representacao: { c: 0, d: 8, u: 6 },
-    resposta: { c: 0, d: 8, u: 6 }
-  },
-  {
-    tipo: "Conta",
-    enunciado: "Resolva: 120 + 34. Depois preencha C, D e U.",
-    resposta: { c: 1, d: 5, u: 4 }
-  },
-  {
-    tipo: "Conta",
-    enunciado: "Resolva: 243 - 21. Depois preencha C, D e U.",
-    resposta: { c: 2, d: 2, u: 2 }
-  },
-  {
-    tipo: "Conta",
-    enunciado: "Resolva: 168 + 101. Depois preencha C, D e U.",
-    resposta: { c: 2, d: 6, u: 9 }
-  },
-  {
-    tipo: "Conta",
-    enunciado: "Resolva: 305 + 44. Depois preencha C, D e U.",
-    resposta: { c: 3, d: 4, u: 9 }
-  },
-  {
-    tipo: "Interpretação",
-    enunciado:
-      "Ana juntou 2 placas de trânsito de brinquedo, 1 barra de adesivos e 7 cubinhos. Que número ela formou?",
-    resposta: { c: 2, d: 1, u: 7 }
-  },
-  {
-    tipo: "Interpretação",
-    enunciado:
-      "No cofrinho de Pedro há 1 moeda de 100, 5 moedas de 10 e 2 moedas de 1. Complete a tabela CDU.",
-    resposta: { c: 1, d: 5, u: 2 }
-  },
-  {
-    tipo: "Interpretação",
-    enunciado:
-      "A escola recebeu 3 caixas com 100 lápis, 2 pacotes com 10 e mais 4 lápis soltos. Qual o número total?",
-    resposta: { c: 3, d: 2, u: 4 }
-  },
-  {
-    tipo: "Interpretação",
-    enunciado:
-      "Em um jogo, Sofia ganhou 4 pontos de centena, 0 de dezena e 9 de unidade. Preencha C, D e U.",
-    resposta: { c: 4, d: 0, u: 9 }
-  }
-];
+const TOTAL_QUESTOES_RODADA = 30;
 
 let rodada = 1;
 let pontuacao = 0;
@@ -97,6 +28,130 @@ function embaralhar(lista) {
     [copia[i], copia[j]] = [copia[j], copia[i]];
   }
   return copia;
+}
+
+function valorAleatorio(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function numeroParaCDU(numero) {
+  return {
+    c: Math.floor(numero / 100),
+    d: Math.floor((numero % 100) / 10),
+    u: numero % 10
+  };
+}
+
+function criarQuestaoMaterial() {
+  let c = valorAleatorio(0, 9);
+  let d = valorAleatorio(0, 9);
+  let u = valorAleatorio(0, 9);
+
+  if (c === 0 && d === 0 && u === 0) {
+    u = 1;
+  }
+
+  return {
+    tipo: "Material dourado",
+    enunciado: "Observe os blocos e complete a tabela CDU.",
+    representacao: { c, d, u },
+    resposta: { c, d, u }
+  };
+}
+
+function criarQuestaoConta() {
+  const usarSoma = Math.random() < 0.5;
+
+  if (usarSoma) {
+    let a = 0;
+    let b = 0;
+    let resultado = 1000;
+
+    while (resultado > 999) {
+      a = valorAleatorio(100, 850);
+      b = valorAleatorio(10, 250);
+      resultado = a + b;
+    }
+
+    return {
+      tipo: "Conta",
+      enunciado: `Resolva: ${a} + ${b}. Depois preencha C, D e U.`,
+      resposta: numeroParaCDU(resultado)
+    };
+  }
+
+  const a = valorAleatorio(200, 999);
+  const b = valorAleatorio(10, a - 100);
+  const resultado = a - b;
+
+  return {
+    tipo: "Conta",
+    enunciado: `Resolva: ${a} - ${b}. Depois preencha C, D e U.`,
+    resposta: numeroParaCDU(resultado)
+  };
+}
+
+function criarQuestaoInterpretacao() {
+  const c = valorAleatorio(0, 9);
+  const d = valorAleatorio(0, 9);
+  const u = valorAleatorio(0, 9);
+  const total = c * 100 + d * 10 + u;
+
+  const modelos = [
+    `No cofrinho da Ana há ${c} moedas de 100, ${d} moedas de 10 e ${u} moedas de 1. Complete a tabela CDU.`,
+    `A turma montou ${c} placas, ${d} barras e ${u} cubos de material dourado. Qual número foi formado?`,
+    `Em um jogo, Pedro ganhou ${c} pontos de centena, ${d} de dezena e ${u} de unidade. Preencha C, D e U.`,
+    `Uma caixa tem ${c} grupos de 100 figurinhas, ${d} grupos de 10 e ${u} figurinhas soltas. Qual número total?`,
+    `A professora escreveu o número ${total} no quadro e pediu a decomposição em C, D e U. Complete a tabela.`
+  ];
+
+  return {
+    tipo: "Interpretação",
+    enunciado: modelos[valorAleatorio(0, modelos.length - 1)],
+    resposta: { c, d, u }
+  };
+}
+
+function assinaturaQuestao(questao) {
+  return `${questao.tipo}|${questao.enunciado}|${questao.resposta.c}${questao.resposta.d}${questao.resposta.u}`;
+}
+
+function gerarQuestoesDaRodada(totalQuestoes) {
+  const geradores = [criarQuestaoMaterial, criarQuestaoConta, criarQuestaoInterpretacao];
+  const questoes = [];
+  const assinaturas = new Set();
+
+  const porTipo = Math.floor(totalQuestoes / geradores.length);
+
+  geradores.forEach((gerador) => {
+    let geradas = 0;
+    let tentativas = 0;
+
+    while (geradas < porTipo && tentativas < 500) {
+      tentativas += 1;
+      const questao = gerador();
+      const assinatura = assinaturaQuestao(questao);
+      if (assinaturas.has(assinatura)) {
+        continue;
+      }
+      assinaturas.add(assinatura);
+      questoes.push(questao);
+      geradas += 1;
+    }
+  });
+
+  while (questoes.length < totalQuestoes) {
+    const gerador = geradores[valorAleatorio(0, geradores.length - 1)];
+    const questao = gerador();
+    const assinatura = assinaturaQuestao(questao);
+    if (assinaturas.has(assinatura)) {
+      continue;
+    }
+    assinaturas.add(assinatura);
+    questoes.push(questao);
+  }
+
+  return embaralhar(questoes);
 }
 
 function limparInputs() {
@@ -200,15 +255,15 @@ function proximaQuestao() {
 function finalizarRodada() {
   tipoQuestaoEl.textContent = "-";
   tituloQuestaoEl.textContent = "Fim da rodada!";
-  textoQuestaoEl.textContent = `Você terminou a rodada ${rodada} com ${pontuacao} ponto(s). Clique em "Nova rodada" para jogar novamente com ordem aleatória.`;
-  materialEl.innerHTML = "<p>Nova rodada = novas perguntas embaralhadas, sem repetição dentro da rodada.</p>";
+  textoQuestaoEl.textContent = `Você terminou a rodada ${rodada} com ${pontuacao} ponto(s). Clique em \"Nova rodada\" para jogar mais 30 questões com novos valores.`;
+  materialEl.innerHTML = "<p>Nova rodada = 30 novas perguntas aleatórias, sem repetição dentro da rodada.</p>";
   btnVerificar.disabled = true;
   btnProxima.disabled = true;
   btnNovaRodada.hidden = false;
 }
 
 function iniciarRodada() {
-  questoesRodada = embaralhar(QUESTOES);
+  questoesRodada = gerarQuestoesDaRodada(TOTAL_QUESTOES_RODADA);
   indiceQuestao = 0;
   pontuacao = 0;
   pontuacaoEl.textContent = pontuacao;
