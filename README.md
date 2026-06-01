@@ -24,8 +24,25 @@ Jogo educacional para praticar **Centena, Dezena e Unidade (CDU)** com foco no *
 Como é um jogo web estático, basta abrir `index.html` no navegador.
 
 Opcionalmente, para rodar com servidor local:
-    # a partir da pasta do repositório clonado
-    python3 -m http.server 8000
+
+```bash
+# a partir da pasta do repositório clonado
+python3 -m http.server 8000
 ```
 
 Depois abra: `http://localhost:8000`
+
+## Gerar pacote `.edugame`
+
+O projeto inclui um empacotador em `scripts/package-edugame.sh`.
+
+```bash
+# gera em dist/cdu-matematica-2ano.edugame
+./scripts/package-edugame.sh
+```
+
+Também é possível informar um arquivo de saída:
+
+```bash
+./scripts/package-edugame.sh dist/meu-jogo.edugame
+```
