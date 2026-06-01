@@ -1,0 +1,22 @@
+{
+  "id": "edulab-jogo-matematica-cdu-2ano",
+  "name": "CDU Matemática — 2º Ano",
+  "version": "1.0.0",
+  "developer": "EduLab Games",
+  "credits": "Equipe EduLab Games",
+  "school_grades": [2],
+  "subject": "matematica",
+  "tags": ["matematica", "2ano", "centena", "dezena", "unidade", "material-dourado", "cdu"],
+  "mode": ["solo"],
+  "min_players": 1,
+  "max_players": 1,
+  "session_required": false,
+  "supports_teacher_panel": false,
+  "supports_ranking": false,
+  "estimated_duration_minutes": 12,
+  "entry_point": "index.html",
+  "thumbnail": "assets/thumbnail.svg",
+  "description": "Jogo de Matemática para o 2º ano com atividades de centena, dezena e unidade (CDU), incluindo material dourado, contas e problemas simples.",
+  "status": "published",
+  "api_version": "1.0.0"
+}
