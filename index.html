@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jogo CDU - Material Dourado</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="cabecalho">
+      <h1>Jogo CDU com Material Dourado</h1>
+      <p>Aprenda <strong>Centena, Dezena e Unidade</strong> brincando!</p>
+    </header>
+
+    <section class="painel-status" aria-live="polite">
+      <p><strong>Rodada:</strong> <span id="rodadaAtual">1</span></p>
+      <p><strong>Questão:</strong> <span id="questaoAtual">1</span>/<span id="totalQuestoes">0</span></p>
+      <p><strong>Pontos:</strong> <span id="pontuacao">0</span></p>
+      <p><strong>Tipo:</strong> <span id="tipoQuestao">-</span></p>
+    </section>
+
+    <section class="enunciado" aria-live="polite">
+      <h2 id="tituloQuestao">Vamos começar!</h2>
+      <p id="textoQuestao"></p>
+    </section>
+
+    <section class="material" id="materialDourado" aria-label="Representação visual do material dourado"></section>
+
+    <section class="resposta">
+      <h3>Preencha a tabela CDU</h3>
+      <table aria-label="Tabela de Centena Dezena e Unidade">
+        <thead>
+          <tr>
+            <th scope="col">C</th>
+            <th scope="col">D</th>
+            <th scope="col">U</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input id="inputC" type="number" min="0" max="9" inputmode="numeric" /></td>
+            <td><input id="inputD" type="number" min="0" max="9" inputmode="numeric" /></td>
+            <td><input id="inputU" type="number" min="0" max="9" inputmode="numeric" /></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="acoes">
+        <button id="btnVerificar" type="button">Verificar</button>
+        <button id="btnProxima" type="button" disabled>Próxima questão</button>
+        <button id="btnNovaRodada" type="button" hidden>Nova rodada</button>
+      </div>
+      <p id="feedback" class="feedback" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
